@@ -28,6 +28,13 @@ Required secrets: `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`, `VPS_SITE_PATH`, option
 
 VPS setup: see [`infra/README.md`](infra/README.md).
 
+## Team workflow
+
+- [WORKFLOW.md](WORKFLOW.md) — branches, roles, multi-agent rules
+- [CYCLE-1.md](CYCLE-1.md) — Day 0 → Ship checklist
+- [SLACK.md](SLACK.md) — Slack channels, bug intake, deploy notifications
+- [AUTOMATION-ROADMAP.md](AUTOMATION-ROADMAP.md) — Phase 1.5+ Cursor SDK plan
+
 ## URL layout
 
 | Path | Served by | Purpose |

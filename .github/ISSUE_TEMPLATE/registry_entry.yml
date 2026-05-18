@@ -1,0 +1,47 @@
+name: Add game to registry
+description: Track adding a shipped game to the catalog.
+title: "[registry] add <slug>"
+labels: ["registry"]
+body:
+  - type: input
+    id: slug
+    attributes:
+      label: Slug
+      placeholder: orbit-drift-01
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: Title
+    validations:
+      required: true
+  - type: input
+    id: cycle
+    attributes:
+      label: Cycle number
+    validations:
+      required: true
+  - type: input
+    id: repo
+    attributes:
+      label: Game repo URL
+      placeholder: https://github.com/matiaspereiraobando/alpe-<slug>
+    validations:
+      required: true
+  - type: input
+    id: play_url
+    attributes:
+      label: Play URL
+      placeholder: https://gamejam.alpegames.cl/games/<slug>/
+    validations:
+      required: true
+  - type: checkboxes
+    id: ship_check
+    attributes:
+      label: Ship checklist
+      options:
+        - label: Game deploy is green
+        - label: HEAD check on play URL returns 200
+        - label: Postmortem markdown drafted
+        - label: Thumbnail or placeholder ready

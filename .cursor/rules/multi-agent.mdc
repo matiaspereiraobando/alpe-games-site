@@ -1,0 +1,37 @@
+---
+description: Branch ownership and multi-agent collaboration rules for the ALPE Games catalog
+globs: "**/*"
+alwaysApply: true
+---
+
+# ALPE Games catalog — multi-agent rules
+
+Reference: `WORKFLOW.md` at the repo root.
+
+## Branch ownership
+
+- Never push to `main` directly. Create a branch (`feat/<short>`, `fix/<short>`, or `agent/<issue>-<slug>`).
+- One branch has one owner at a time.
+- Registry additions go on a dedicated branch named after the game slug, e.g. `registry/<slug>`.
+
+## Scope discipline
+
+- Every code change references a GitHub issue.
+- Catalog UI changes and registry entries should be separate PRs whenever possible.
+- Do not redesign the site during an active game cycle. If a redesign is needed, open a tracking issue and defer.
+
+## Registry edits
+
+- `data/games.registry.json` is the contract between game repos and the site. Run `npm run validate:registry` after any change.
+- New games must have `embed.url` of the form `https://gamejam.alpegames.cl/games/{slug}/` (unless `embed.type` is `external`).
+- HEAD-check the play URL before merging the registry entry.
+
+## Reviewer mode
+
+- When asked to review a PR or registry change, do not push commits unless explicitly requested.
+- For a registry PR, confirm: slug uniqueness, URL pattern, postmortem link, and ship checklist.
+
+## PR hygiene
+
+- Keep PRs small. Catalog changes should not bundle multiple games.
+- Do not touch `.github/workflows/*.yml` or `infra/` unless the task is explicitly CI or VPS work.

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Team workflow
+    url: https://github.com/matiaspereiraobando/alpe-games-site/blob/main/WORKFLOW.md
+    about: Branches, agents, and cycle rhythm.
+  - name: Report a game-specific bug
+    url: https://github.com/matiaspereiraobando
+    about: Open the issue on the specific game repo (alpe-{slug}) instead.

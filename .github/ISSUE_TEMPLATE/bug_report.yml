@@ -1,0 +1,44 @@
+name: Bug report (catalog site)
+description: Report a bug on the catalog site, not a specific game.
+title: "[bug] "
+labels: ["bug", "catalog"]
+body:
+  - type: input
+    id: url
+    attributes:
+      label: URL where you saw the bug
+      placeholder: https://gamejam.alpegames.cl/jam/some-slug/
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser / device
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What actually happened
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - blocker
+        - major
+        - minor
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Screenshots / extra notes

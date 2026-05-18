@@ -35,7 +35,7 @@ Or copy `infra/setup-vps.sh` and `infra/Caddyfile` from `alpe-games-site` after 
 
 ## Caddy
 
-Config at `/etc/caddy/Caddyfile` — serves catalog at `/` and games at `/games/*`.
+Config at `/etc/caddy/Caddyfile` — catalog at `/` and `/games/`; playable builds at `/games/{slug}/` only (see `infra/Caddyfile`).
 
 ## Deploy user
 
