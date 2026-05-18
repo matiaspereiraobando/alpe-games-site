@@ -28,9 +28,17 @@ Required secrets: `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`, `VPS_SITE_PATH`, option
 
 VPS setup: see [`infra/README.md`](infra/README.md).
 
+## URL layout
+
+| Path | Served by | Purpose |
+|------|-----------|---------|
+| `/games/{slug}/` | VPS `games/` folder | Playable build (iframe `embed.url`) |
+| `/jam/{slug}/` | Astro catalog | Game page with embed + postmortem links |
+| `/games/` | Astro | Game index |
+
 ## Adding a shipped game
 
 1. Deploy the game repo to `https://gamejam.alpegames.cl/games/{slug}/`
-2. Add an entry to `games.registry.json`
+2. Add an entry to `games.registry.json` (`embed.url` = play URL above)
 3. Add postmortem markdown under `src/pages/blog/` if desired
 4. Open PR → merge → catalog redeploys

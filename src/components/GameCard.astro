@@ -14,7 +14,7 @@ const date = new Date(game.releasedAt).toLocaleDateString('en-US', {
 ---
 
 <article class="game-card">
-  <a href={`/games/${game.slug}/`}>
+  <a href={`/jam/${game.slug}/`}>
     {game.thumbnail ? (
       <img src={game.thumbnail} alt="" width="400" height="225" loading="lazy" />
     ) : (
