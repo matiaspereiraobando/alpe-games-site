@@ -1,0 +1,140 @@
+---
+import type { GameEmbed as EmbedConfig } from '../lib/registry';
+
+interface Props {
+  embed: EmbedConfig;
+  title: string;
+}
+
+const { embed, title } = Astro.props;
+const aspect = embed.aspectRatio ?? '16 / 9';
+const sandbox =
+  embed.sandbox?.join(' ') ??
+  'allow-scripts allow-pointer-lock allow-gamepad';
+const embedId = `embed-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+{embed.type === 'iframe' && (
+  <section class="embed-section" data-embed={embedId}>
+    {embed.mobileSupported === false && (
+      <p class="alert" role="status">
+        Mobile play may be limited for this prototype.
+      </p>
+    )}
+    <div class="embed-shell" style={`aspect-ratio: ${aspect};`}>
+      <div class="embed-loading" aria-hidden="true">Loading game…</div>
+      <iframe
+        id={embedId}
+        class="embed-frame"
+        src={embed.url}
+        title={`Play ${title}`}
+        loading="lazy"
+        referrerpolicy="no-referrer"
+        sandbox={sandbox}
+        allow="fullscreen; gamepad"
+      />
+    </div>
+    <div class="embed-toolbar">
+      <a class="btn" href={embed.url} target="_blank" rel="noopener noreferrer">
+        Open in new tab
+      </a>
+      <button type="button" class="btn btn-primary" data-fullscreen={embedId}>
+        Fullscreen
+      </button>
+    </div>
+  </section>
+)}
+
+{embed.type === 'external' && (
+  <section class="embed-section">
+    <p>This release is hosted externally.</p>
+    <a class="btn btn-primary" href={embed.url} target="_blank" rel="noopener noreferrer">
+      Play on external site
+    </a>
+  </section>
+)}
+
+{embed.type === 'self' && (
+  <section class="embed-section" data-embed={embedId}>
+    <div class="embed-shell" style={`aspect-ratio: ${aspect};`}>
+      <iframe
+        id={embedId}
+        class="embed-frame"
+        src={embed.url}
+        title={`Play ${title}`}
+        loading="lazy"
+        referrerpolicy="no-referrer"
+        sandbox={sandbox}
+        allow="fullscreen; gamepad"
+      />
+    </div>
+    <div class="embed-toolbar">
+      <button type="button" class="btn btn-primary" data-fullscreen={embedId}>
+        Fullscreen
+      </button>
+    </div>
+  </section>
+)}
+
+<style>
+  .embed-section {
+    margin: 1.5rem 0;
+  }
+
+  .embed-shell {
+    position: relative;
+    width: 100%;
+    min-height: 280px;
+    background: #000;
+  }
+
+  .embed-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .embed-frame.is-ready {
+    opacity: 1;
+  }
+
+  .embed-loading {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .embed-shell:has(.embed-frame.is-ready) .embed-loading {
+    display: none;
+  }
+</style>
+
+<script>
+  function wireEmbed(root: Document | HTMLElement = document) {
+    root.querySelectorAll<HTMLIFrameElement>('.embed-frame').forEach((frame) => {
+      frame.addEventListener('load', () => frame.classList.add('is-ready'), {
+        once: true,
+      });
+    });
+
+    root.querySelectorAll<HTMLButtonElement>('[data-fullscreen]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-fullscreen');
+        const frame = id ? document.getElementById(id) : null;
+        if (frame?.requestFullscreen) {
+          void frame.requestFullscreen();
+        }
+      });
+    });
+  }
+
+  wireEmbed();
+  document.addEventListener('astro:page-load', () => wireEmbed());
+</script>

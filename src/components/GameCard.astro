@@ -1,0 +1,52 @@
+---
+import type { GameEntry } from '../lib/registry';
+
+interface Props {
+  game: GameEntry;
+}
+
+const { game } = Astro.props;
+const date = new Date(game.releasedAt).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<article class="game-card">
+  <a href={`/games/${game.slug}/`}>
+    {game.thumbnail ? (
+      <img src={game.thumbnail} alt="" width="400" height="225" loading="lazy" />
+    ) : (
+      <div class="thumb-placeholder" aria-hidden="true" />
+    )}
+    <div class="game-card-body">
+      <span class="badge">Cycle {game.cycle ?? '—'}</span>
+      <h2>{game.title}</h2>
+      <p class="meta">
+        {date} · {game.engine}
+      </p>
+      {game.summary && <p>{game.summary}</p>}
+    </div>
+  </a>
+</article>
+
+<style>
+  .thumb-placeholder {
+    height: 140px;
+    background: linear-gradient(135deg, #1a2235, #0f141f);
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+  }
+
+  .game-card p:last-child {
+    margin: 0.5rem 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+</style>

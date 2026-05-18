@@ -1,0 +1,56 @@
+{
+  "$id": "https://gamejam.alpegames.cl/schemas/games.registry.schema.json",
+  "title": "ALPE Games Registry",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "slug",
+      "title",
+      "releasedAt",
+      "authors",
+      "engine",
+      "embed",
+      "repo"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "slug": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "title": { "type": "string", "minLength": 1 },
+      "cycle": { "type": "integer", "minimum": 0 },
+      "releasedAt": { "type": "string", "format": "date" },
+      "authors": {
+        "type": "array",
+        "items": { "type": "string" },
+        "minItems": 1
+      },
+      "engine": { "type": "string", "minLength": 1 },
+      "embed": {
+        "type": "object",
+        "required": ["type", "url"],
+        "additionalProperties": false,
+        "properties": {
+          "type": { "enum": ["iframe", "external", "self"] },
+          "url": { "type": "string", "format": "uri" },
+          "aspectRatio": { "type": "string", "pattern": "^\\d+\\s*/\\s*\\d+$" },
+          "sandbox": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "mobileSupported": { "type": "boolean" }
+        }
+      },
+      "tags": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "summary": { "type": "string" },
+      "postmortem": { "type": "string" },
+      "repo": { "type": "string", "format": "uri" },
+      "thumbnail": { "type": "string" }
+    }
+  }
+}

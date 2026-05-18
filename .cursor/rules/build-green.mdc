@@ -1,0 +1,14 @@
+---
+description: Keep catalog site build and registry validation green
+globs: "**/*"
+alwaysApply: true
+---
+
+# Build discipline
+
+Before finishing changes:
+
+1. `npm run validate:registry`
+2. `npm run build`
+
+Do not merge registry entries with invalid `embed.url` patterns for production games (must use `https://gamejam.alpegames.cl/games/{slug}/` unless `external`).

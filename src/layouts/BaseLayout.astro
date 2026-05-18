@@ -1,0 +1,45 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'ALPE Games — experimental game jams every 10–15 days.' } =
+  Astro.props;
+const fullTitle = title === 'ALPE Games' ? title : `${title} · ALPE Games`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="logo" href="/">ALPE <span>Games</span></a>
+        <nav class="nav" aria-label="Main">
+          <a href="/games/">Games</a>
+          <a href="/blog/">Journal</a>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          ALPE Games — learning through rapid prototypes. Hosted at
+          <a href="https://gamejam.alpegames.cl">gamejam.alpegames.cl</a>.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

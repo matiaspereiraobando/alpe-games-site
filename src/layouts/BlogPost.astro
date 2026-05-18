@@ -1,0 +1,29 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description?: string;
+    date: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+const date = new Date(frontmatter.date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
+  <article class="prose">
+    <p class="badge">{date}</p>
+    <h1>{frontmatter.title}</h1>
+    <slot />
+    <p style="margin-top: 2rem;">
+      <a href="/blog/">← Back to journal</a>
+    </p>
+  </article>
+</BaseLayout>

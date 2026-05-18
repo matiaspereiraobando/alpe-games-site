@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Journal" description="Postmortems and notes from ALPE Games cycles.">
+  <section class="hero">
+    <h1>Journal</h1>
+    <p>Postmortems from each 10–15 day cycle.</p>
+  </section>
+
+  <ul class="post-list">
+    <li>
+      <a href="/blog/hello-world/">Hello World — pipeline validation</a>
+      <span class="meta">May 17, 2026</span>
+    </li>
+  </ul>
+</BaseLayout>
+
+<style>
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .post-list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .meta {
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+</style>

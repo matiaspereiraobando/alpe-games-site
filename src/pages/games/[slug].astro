@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GameEmbed from '../../components/GameEmbed.astro';
+import { games, getGame } from '../../lib/registry';
+
+export function getStaticPaths() {
+  return games.map((game) => ({ params: { slug: game.slug } }));
+}
+
+const { slug } = Astro.params;
+const game = getGame(slug!);
+
+if (!game) {
+  return Astro.redirect('/games/');
+}
+
+const date = new Date(game.releasedAt).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={game.title} description={game.summary}>
+  <article>
+    <p class="badge">Cycle {game.cycle ?? '—'} · {game.engine}</p>
+    <h1>{game.title}</h1>
+    <p class="meta-line">
+      Released {date} · {game.authors.join(', ')}
+    </p>
+    {game.summary && <p class="summary">{game.summary}</p>}
+
+    <GameEmbed embed={game.embed} title={game.title} />
+
+    {game.tags && game.tags.length > 0 && (
+      <p class="tags">
+        {game.tags.map((tag) => (
+          <span class="badge">{tag}</span>
+        ))}
+      </p>
+    )}
+
+    <div class="links">
+      {game.postmortem && (
+        <a href={game.postmortem}>Read postmortem</a>
+      )}
+      <a href={game.repo} target="_blank" rel="noopener noreferrer">Source repo</a>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .meta-line {
+    color: var(--muted);
+    margin-top: -0.25rem;
+  }
+
+  .summary {
+    max-width: 60ch;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .links {
+    display: flex;
+    gap: 1.25rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+</style>

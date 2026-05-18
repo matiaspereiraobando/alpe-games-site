@@ -1,0 +1,13 @@
+---
+description: ALPE Games jam scope guardrails for catalog site changes
+globs: "**/*"
+alwaysApply: true
+---
+
+# ALPE Games — catalog scope
+
+- Do not add backend APIs, auth, databases, or user accounts unless explicitly requested.
+- Registry-driven pages only: game metadata lives in `data/games.registry.json`.
+- Keep embed hosting engine-agnostic (`iframe`, `external`, `self`).
+- Do not embed secrets in the catalog repo.
+- Prefer small, focused PRs; avoid redesigning the whole site during a game cycle.

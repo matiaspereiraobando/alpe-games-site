@@ -1,0 +1,17 @@
+gamejam.alpegames.cl {
+	root * /var/www/alpegames/site
+	file_server
+
+	@game path /games/*
+	handle @game {
+		root * /var/www/alpegames/games
+		uri strip_prefix /games
+		try_files {path} {path}/index.html
+		file_server
+	}
+
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+	}
+}

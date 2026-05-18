@@ -1,0 +1,25 @@
+[
+  {
+    "slug": "hello-world",
+    "title": "Hello World",
+    "cycle": 0,
+    "releasedAt": "2026-05-17",
+    "authors": ["ALPE Games"],
+    "engine": "phaser-3",
+    "summary": "Pipeline validation game — click the orb to score.",
+    "embed": {
+      "type": "iframe",
+      "url": "https://gamejam.alpegames.cl/games/hello-world/",
+      "aspectRatio": "16 / 9",
+      "sandbox": [
+        "allow-scripts",
+        "allow-pointer-lock",
+        "allow-gamepad"
+      ],
+      "mobileSupported": true
+    },
+    "tags": ["prototype", "pipeline"],
+    "postmortem": "/blog/hello-world",
+    "repo": "https://github.com/matiaspereiraobando/alpe-hello-world"
+  }
+]

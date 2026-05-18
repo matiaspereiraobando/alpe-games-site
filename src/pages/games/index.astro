@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GameCard from '../../components/GameCard.astro';
+import { getGamesSorted } from '../../lib/registry';
+
+const games = getGamesSorted();
+---
+
+<BaseLayout title="Games" description="All ALPE Games jam prototypes.">
+  <section class="hero">
+    <h1>Games</h1>
+    <p>Every entry is a short-cycle experiment hosted at gamejam.alpegames.cl.</p>
+  </section>
+
+  {games.length > 0 ? (
+    <div class="game-grid">
+      {games.map((game) => (
+        <GameCard game={game} />
+      ))}
+    </div>
+  ) : (
+    <p>No games in the registry yet.</p>
+  )}
+</BaseLayout>
